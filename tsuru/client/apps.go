@@ -496,16 +496,6 @@ func (u *unit) Port() string {
 	return strings.Join(ports, ", ")
 }
 
-type lock appTypes.AppLock
-
-func (l *lock) String() string {
-	format := `Lock:
- Acquired in: %s
- Owner: %s
- Running: %s`
-	return fmt.Sprintf(format, l.AcquireDate, l.Owner, l.Reason)
-}
-
 type app struct {
 	IP          string
 	CName       []string
@@ -521,7 +511,7 @@ type app struct {
 	Deploys     uint
 	Pool        string
 	Description string
-	Lock        lock
+	Lock        appTypes.AppLockInterface
 	Quota       quotaTypes.Quota
 	Plan        appTypes.Plan
 	Router      string
